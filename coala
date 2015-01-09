@@ -16,6 +16,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 import os
 from coalib.misc.StringConstants import StringConstants
+from coalib.output.GtkOutputter.GtkOutputter import GtkOutputter
 from coalib.processes.SectionExecutor import SectionExecutor
 from coalib.settings.SectionManager import SectionManager
 
@@ -24,6 +25,8 @@ from coalib.misc.i18n import _
 
 
 if __name__ == "__main__":
+    op = GtkOutputter()
+    print("continuing")
     try:
         sections, all_local_bears, all_global_bears = SectionManager().run()
         for section_name in sections:

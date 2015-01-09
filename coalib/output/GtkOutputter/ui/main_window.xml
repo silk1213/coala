@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+    <object class="GtkWindow" id="main_window">
+        <signal name="delete-event" handler="onDeleteWindow"/>
+        <child>
+            <object class="GtkButton" id="pressmebutton">
+                <property name="label" translatable="yes">Press me!</property>
+                <signal name="pressed" handler="onPressMePressed"/>
+            </object>
+        </child>
+    </object>
+</interface>
