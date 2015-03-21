@@ -16,6 +16,30 @@ def search_for(pattern, string, flags=0, max_match=0):
         yield elem
 
 
+def unescaped_search_for(pattern, string, flags=0, max_match=0)
+    """
+    Searches for a given pattern in a string that is not escaped.
+
+    :param pattern:   A regex pattern that defines what to match unescaped.
+    :param string:    The string to search in.
+    :param flags:     Additional flags to pass to the regex processor.
+    :param max_match: Defines the maximum number of matches to perform. If 0 or
+                      less is provided, the number of splits is not limited.
+    :return:          An iterator returning MatchObject's. Every match object
+                      contains in its first group the backslashes that were
+                      consumed by the internal regex and so don't escape your
+                      pattern.
+    """
+    # Regex explanation:
+    # 1. (?<!\\)((?:\\\\)*) Unescaping sequence. Only matches backslashes if
+    #                       their count is even.
+    # 2. (?:pattern)        A non-capturing group that matches the pattern.
+    regex = r"(?<!\\)((?:\\\\)*)(?:" + pattern + r")"
+
+    for elem in search_for(regex, string, flags, max_match):
+        yield elem
+
+
 def limit(iterator, count):
     """
     A filter that removes all elements behind the set limit.
